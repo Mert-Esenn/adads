@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.name}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body style="background-color: #181818">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="/posts">BPM</a> 
+     <ul class="navbar-nav mr-auto">
+          
+              
+                 {{#if currentUser}}
+                   
+                {{/if}}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#unless currentUser}}
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Giriş Yap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Kayıt Ol</a>
+                </li>
+                {{else}}
+              <li class="nav-item">
+                    <a class="nav-link" href="/posts/publish">Yeni Not</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/{{currentUser.username}}">Giriş Yapılan Hesap: {{currentUser.username}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Çıkış yap</a>
+                </li>
+                {{/unless}}
+            </ul>
+       
+
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           
+        </div>
+    </nav>
+    <br>
+  
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-3">
+                
+                <div class="list-group">
+           
+              <li class="list-group-item active" >Yazan: <strong>{{post.user}}</strong></li>
+                   
+                    <!--<li class="list-group-item"><a href="/posts"><strong>Tüm Postlar</strong></a></li>-->
+                </div>
+            </div>
+            <div class="col-md-9">
+              
+                <div class="thumbnail">
+                    
+                    
+                        
+                        
+                    <div class="caption-full">
+                      <br>
+                        <br><h3><a style="color: #fff">{{post.name}}</a></h3>
+                        <br><p style="color: #ababab">{{post.description}}</p>
+                        <br><center><img src="{{post.gorsel1}}" width="90%" ></center>
+                        <br><center><img src="{{post.gorsel2}}" width="90%" ></center>
+                        <br><center><img src="{{post.gorsel3}}" width="90%" ></center>
+                        <br><center><img src="{{post.gorsel4}}" width="90%" ></center>
+                        <br><center><img src="{{post.gorsel5}}" width="90%" ></center>
+                     <!-- <img src="./public/img/302136897_849569416453092_755355704541665255_n.jpg"> -->
+                        <p>
+                        </p>
+                   
+ <a class="btn btn-sm btn-warning" href="/posts/{{post._id}}/edit">Düzenle</a>
+                       <br><br>
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="text-right">
+                        <a class="btn btn-success" href="/posts/{{post._id}}/comments/new">
+                            Yorum Yap
+                        </a>
+                    </div>
+                    <hr>
+                    {{#each post.comments}}
+                  <p style="color: #ababab">
+                    -
+                  </p>  
+                  <div class="row">
+                        <div class="col-md-12" style="color: #fff">
+                            <strong>{{author.username}}</strong>
+                            <span class="float-right" style="color: #ababab">Bugün Eklendi</span>
+                            <p style="color: #ababab">
+                                {{text}}
+                            </p>
+                            <a class="btn btn-sm btn-warning" href="/posts/{{../post._id}}/comments/{{_id}}/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/posts/{{../post._id}}/comments/{{_id}}?_method=DELETE"
+                                method="POST">
+                                <button class="btn btn-sm btn-danger">Sil</button>
+                            </form>
+                        </div>
+                    </div>
+                  <br><br><br><br><br><br><br>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

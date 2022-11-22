@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notlar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheet/posts.css">
+</head>
+
+<body style="background-color: #181818">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="/posts">BPM</a> 
+     <ul class="navbar-nav mr-auto">
+          
+              
+                 {{#if currentUser}}
+                   
+                {{/if}}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#unless currentUser}}
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Giriş Yap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Kayıt Ol</a>
+                </li>
+                {{else}}
+              <li class="nav-item">
+                    <a class="nav-link" href="/posts/publish">Yeni Not</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/{{currentUser.username}}">Giriş Yapılan Hesap: {{currentUser.username}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Çıkış yap</a>
+                </li>
+                {{/unless}}
+            </ul>
+       
+
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           
+        </div>
+    </nav>
+    <div class="container">
+      <center><h1 style="color: #fff">
+        Son Notlar:
+        </h1></center><br>
+        <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+            {{#each posts}}
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="https://media.discordapp.net/attachments/822214881998536714/1043303990475108353/bpmsite.png?width=841&height=473" width="256" height="144">
+                    <div class="caption">
+                        <h4 style="color: #ebebeb">{{this.name}}</h4>
+                   
+                    </div>
+                    <p>
+                        <a href="/posts/{{this._id}}" class="btn btn-primary">Oku</a>
+                    </p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</body>
+
+</html> 

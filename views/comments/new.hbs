@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Yorum</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: #181818">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="/posts">BPM</a> 
+     <ul class="navbar-nav mr-auto">
+          
+              
+                 {{#if currentUser}}
+                   
+                {{/if}}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#unless currentUser}}
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Giriş Yap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Kayıt Ol</a>
+                </li>
+                {{else}}
+              <li class="nav-item">
+                    <a class="nav-link" href="/posts/publish">Yeni Not</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/{{currentUser.username}}">Giriş Yapılan Hesap: {{currentUser.username}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Çıkış yap</a>
+                </li>
+                {{/unless}}
+            </ul>
+       
+
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           
+        </div>
+    </nav>
+    <div class="container">
+        {{!-- <div class="row"> --}}
+        <h1 style="text-align: center;color: #fff">Yorum: {{post.name}}</h1>
+        <div style="width: 100%; margin: 25px auto;">
+            <form action="/posts/{{post._id}}/comments" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment[text]" placeholder="Yorum">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Onayla</button>
+                </div>
+            </form>
+            <a href="/posts">Geri</a>
+        </div>
+        {{!-- </div> --}}
+    </div>
+</body>
+
+</html> 

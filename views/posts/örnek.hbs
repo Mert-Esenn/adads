@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videolar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheet/posts.css">
+</head>
+
+  
+<body style="background-color: #181818">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/posts">Forvalet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/posts">Ana Sayfa <span class="sr-only">(current)</span></a>
+                </li>
+              
+                 {{#if currentUser}}
+                    <!-- <li class="nav-item active">
+                    <a class="nav-link"  href="/user/{{currentUser.username}}"></a>
+                </li> -->
+                {{/if}}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#unless currentUser}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Giriş Yap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Kayıt Ol</a>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/{{currentUser.username}}">Giriş Yapılan Hesap: {{currentUser.username}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Çıkış yap</a>
+                </li>
+                {{/unless}}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+      <center><h1 style="color: #fff">
+        Son Videolar:
+        </h1></center><br>
+        <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+            {{#each posts}}
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="{{this.image}}" width="256" height="144">
+                    <div class="caption">
+                        <h4 style="color: #ebebeb">{{this.name}}</h4>
+                      <h6 style="color: #9e9e9e">
+                        süre: {{this.süre}} - {{this.date}}
+                      </h6>
+                    </div>
+                    <p>
+                        <a href="/posts/{{this._id}}" class="btn btn-primary">İzle</a>
+                    </p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</body>
+
+</html> 
